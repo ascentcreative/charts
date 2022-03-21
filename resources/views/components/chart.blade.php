@@ -1,30 +1,18 @@
 @once
-    @push('scripts')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js"></script>
-    @endpush
+
+    @include('charts::chart-setup')
+
 @endonce
 
-@push('scripts')
 
-
-@php $unid = uniqid(); @endphp
-
-<script>
-    
-  var ctx{{ $unid }} = document.getElementById('chartJSContainer-{{ $unid }}').getContext('2d');
-  var chart{{ $unid }} = new Chart(ctx{{ $unid }}, {
-        type: '{{ $type }}',
-        data: {!! json_encode($chartData) !!},
-        options: {!! json_encode($options) !!}
-      
-  });
-  
-  </script>
-
-@endpush
-
-<canvas id="chartJSContainer-{{ $unid }}" 
+<canvas class="chart-js"
     @if($width ?? false) width="{{ $width }}" @endif
     @if($height ?? false) width="{{ $height }}" @endif  
+
+    {{-- data-chart-id="{{ $unid }}" --}}
+    data-chart-type="{{ $type }}"
+    data-chart-data="{{ json_encode($chartData) }}"
+    data-chart-options="{{ json_encode($options) }}"
     ></canvas>
+
 
