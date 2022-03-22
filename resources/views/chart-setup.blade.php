@@ -13,20 +13,24 @@
             
             chart = Chart.getChart($(this)[0]);
 
-            // console.log(chart);
-
             if(chart) {
                 chart.destroy();
-            }
+            } 
 
+            {{-- 
+                When acccessed in Livewire, the data attr updates, but that doesn't push to the element data. 
+                So, we'll always access the ATTR data directly      
+            --}}
+            
             chart = new Chart(ctxtmp, {
-                    type: $(this).data('chart-type'),
-                    data: $(this).data('chart-data'),
-                    options: $(this).data('chart-options')
+                    type: $(this).attr('data-chart-type'),
+                    data: $.parseJSON($(this).attr('data-chart-data')),
+                    options: $.parseJSON($(this).attr('data-chart-options'))
                 
                 }); 
+
+        
                 
-            // console.log($(this).data('chart-data'));
         });
     }
 
