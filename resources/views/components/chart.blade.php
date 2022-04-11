@@ -1,5 +1,3 @@
-{{ $renderer }}
-
 @if($renderer=='node')
 
     {{-- Divert rendering to Node endpoint --}}
@@ -8,6 +6,8 @@
     @php
 
         $c = [
+            "width" => $width,
+            "height" => $height,
             "type" => $type,
             "data" => $chartData,
             "options" => $options
@@ -16,7 +16,7 @@
 
     @endphp
 
-    <img src="{{ env('NODE_CHART_ENDPOINT') }}?c={{ encrypt(json_encode($c)) }}" width="75" height="30">
+    <img src="{{ env('NODE_CHART_ENDPOINT') }}?c={{ encrypt(json_encode($c)) }}" width="{{ $width }}" height="{{ $height }}">
 
 
 @else
