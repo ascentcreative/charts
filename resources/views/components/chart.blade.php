@@ -1,3 +1,5 @@
+{{ $renderer }}
+
 @if($renderer=='node')
 
     {{-- Divert rendering to Node endpoint --}}
