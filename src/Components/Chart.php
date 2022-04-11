@@ -16,12 +16,14 @@ class Chart extends Component
     public $width;
     public $height;
 
+    public $renderer;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(ChartBuilder $builder, $width=false, $height=false)
+    public function __construct(ChartBuilder $builder, $width=false, $height=false, $renderer="javsacript")
     {
 
         // dd($builder->getData());
@@ -31,6 +33,8 @@ class Chart extends Component
 
        $this->width = $width;
        $this->height = $height;
+
+       $this->renderer = $renderer;
 
     }
 
