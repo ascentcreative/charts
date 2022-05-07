@@ -24,11 +24,11 @@
     {{-- Rendering via chart.js in the browser --}}
 
     @once
-
-        @include('charts::chart-setup')
+        
+        {{-- @include('charts::chart-setup') --}}
 
     @endonce
-
+    
     <div style="width: {{ $width }}px; height: {{ $height }}px;" class="m-2"> 
     <canvas class="chart-js"
         {{-- @if($width ?? false) width="{{ $width }}" @endif
