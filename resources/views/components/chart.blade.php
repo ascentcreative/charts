@@ -24,9 +24,9 @@
     {{-- Rendering via chart.js in the browser --}}
 
     @once
-        
-        {{-- @include('charts::chart-setup') --}}
-
+        @if($autosetup)
+            @include('charts::chart-setup')
+        @endif
     @endonce
     
     <div style="width: {{ $width }}px; height: {{ $height }}px;" class="m-2"> 
