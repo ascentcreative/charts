@@ -20,13 +20,17 @@ class Chart extends Component
     public $autosetup;
 
 
+    public $encode;
+    public $encodePrefix;
+
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(ChartBuilder $builder, $width=false, $height=false, $renderer="javsacript", $autosetup=true)
+    public function __construct(ChartBuilder $builder, $width=false, $height=false, $renderer="javsacript", $autosetup=true, $encode=false, $encodePrefix="data:image/png;base64,")
     {
 
         // dd($builder->getData());
@@ -39,6 +43,9 @@ class Chart extends Component
 
        $this->renderer = $renderer;
        $this->autosetup = $autosetup;
+
+       $this->encode = $encode;
+       $this->encodePrefix = $encodePrefix;
 
     }
 

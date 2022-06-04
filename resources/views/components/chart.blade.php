@@ -13,10 +13,22 @@
             "options" => $options
         ];
 
+        // $img1 = 'data:image/png;base64,' . base64_encode(file_get_contents(env('NODE_CHART_ENDPOINT') . '?c=' . encrypt(json_encode($c))));
+
+       
 
     @endphp
 
-    <img src="{{ env('NODE_CHART_ENDPOINT') }}?c={{ encrypt(json_encode($c)) }}" width="{{ $width }}" height="{{ $height }}">
+    {{-- <img src="{{ env('NODE_CHART_ENDPOINT') }}?c={{ encrypt(json_encode($c)) }}" width="{{ $width }}" height="{{ $height }}"> --}}
+    @if($encode) 
+        @php 
+             $img1 = $encodePrefix . base64_encode(file_get_contents(env('NODE_CHART_ENDPOINT') . '?c=' . encrypt(json_encode($c))));
+        @endphp
+        <img src="{{ $img1 }}" width="{{ $width }}" height="{{ $height }}">
+    @else
+        <img src="{{ env('NODE_CHART_ENDPOINT') . '?c=' . encrypt(json_encode($c)) }}" width="{{ $width }}" height="{{ $height }}">
+    @endif
+
 
 
 @else
