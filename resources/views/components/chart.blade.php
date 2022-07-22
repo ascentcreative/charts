@@ -42,9 +42,15 @@
             @include('charts::chart-setup')
         @endif
     @endonce
-    
-    <div style="width: {{ $width }}px; height: {{ $height }}px;" class="m-2"> 
-    <canvas class="chart-js"
+
+    @php
+        $style = collect($attributes['styles'])->transform(function($item, $key) {
+            return $key . ': ' . $item;
+        })->join('; ');
+    @endphp
+
+    <div style="{{$style}}; width: {{ $width }}px; height: {{ $height }}px;" xclass="m-2"> 
+    <canvas class="chart-js" style=""
         {{-- @if($width ?? false) width="{{ $width }}" @endif
         @if($height ?? false) width="{{ $height }}" @endif   --}}
 
