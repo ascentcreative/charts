@@ -23,6 +23,8 @@ class Chart extends Component
     public $encode;
     public $encodePrefix;
 
+    public $lazy = false;
+
 
 
     /**
@@ -30,13 +32,20 @@ class Chart extends Component
      *
      * @return void
      */
-    public function __construct(ChartBuilder $builder, $width=false, $height=false, $renderer="javsacript", $autosetup=true, $encode=false, $encodePrefix="data:image/png;base64,")
+    public function __construct(ChartBuilder $builder, $width=false, $height=false, 
+                        $renderer="javascript", $lazy=false, $autosetup=true, $encode=false, $encodePrefix="data:image/png;base64,")
     {
 
         // dd($builder->getData());
-       $this->chartData = $builder->getChartData();
-       $this->options = $builder->getOptions();
-       $this->type = $builder->getType();
+        if($renderer != 'javascript' || !$lazy) {
+            // grab the data in the initial request
+            $this->chartData = $builder->getChartData();
+            $this->options = $builder->getOptions();
+            $this->type = $builder->getType();
+        } else {
+            // defer the data load for the chart for Javascript / Ajax
+            $this->chartDataUrl = ''; // need to somehow build a route to request the data
+        }
 
        $this->width = $width;
        $this->height = $height;
@@ -46,6 +55,8 @@ class Chart extends Component
 
        $this->encode = $encode;
        $this->encodePrefix = $encodePrefix;
+
+       $this->lazy = $lazy;
 
     }
 
