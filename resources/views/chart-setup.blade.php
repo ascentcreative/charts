@@ -32,9 +32,28 @@
 
                 } else {
 
+                    let data = $.parseJSON($(this).attr('data-chart-data'));
+
+                    for(i in data.datasets) {
+
+                        let set = data.datasets[i];
+                        let functions = data.datasets[i]['segmentFunctions'];
+                        let segment = set.segment ?? {};
+
+                        for(prop in functions) {
+                            let fn = functions[prop];
+                            if(fn) {
+                                segment[prop] = ctx => eval(fn + "(ctx)");
+                            }
+                        }
+
+                        set.segment = segment;
+
+                    }
+
                     chart = new Chart(ctxtmp, {
                     type: $(this).attr('data-chart-type'),
-                    data: $.parseJSON($(this).attr('data-chart-data')),
+                    data: data,
                     options: $.parseJSON($(this).attr('data-chart-options'))
                 
                 }); 
