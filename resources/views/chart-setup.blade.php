@@ -10,6 +10,8 @@
         // TODO add a lazy load option where we actually request the data, 
         // not just render what's been put in the page.
 
+        // TODO - Most importantly... make this into a proper widget, not just a random function
+
          $('.chart-js').not('.rendered').each(function(i) {
             
             var ctxtmp = $(this)[0].getContext('2d');
